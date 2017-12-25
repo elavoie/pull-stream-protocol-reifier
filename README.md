@@ -99,6 +99,6 @@ Events correspond to the request or answers of the pull-stream callback protocol
     port: String, // (default: 'UO')
     type: 'error', 
     i: Number, // (>= 1)
-    err: Error
+    err: String
   }
 ````

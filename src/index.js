@@ -86,7 +86,7 @@ module.exports = function (limit, uoPort, diPort) {
           port: uoPort,
           type: 'error',
           i: i,
-          err: iDone
+          err: iDone.message
         })
       } else if (iDone) {
         history.push({
