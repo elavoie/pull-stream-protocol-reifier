@@ -1,0 +1,27 @@
+{
+  "name": "pull-stream-protocol-reifier",
+  "version": "1.0.0",
+  "description": "Produces a stream from the pull-stream protocol events happening during the interaction between two modules.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "tape test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elavoie/pull-stream-protocol-reifier.git"
+  },
+  "keywords": [
+    "pull-stream"
+  ],
+  "author": "Erick Lavoie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elavoie/pull-stream-protocol-reifier/issues"
+  },
+  "homepage": "https://github.com/elavoie/pull-stream-protocol-reifier#readme",
+  "devDependencies": {
+    "debug": "^3.1.0",
+    "pull-stream": "^3.6.1",
+    "tape": "^4.8.0"
+  }
+}
