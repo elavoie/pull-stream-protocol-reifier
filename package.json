@@ -1,6 +1,6 @@
 {
   "name": "pull-stream-protocol-reifier",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Produces a stream from the pull-stream protocol events happening during the interaction between two modules.",
   "main": "src/index.js",
   "scripts": {

@@ -21,16 +21,16 @@ tape('README example', function (t) {
 
 tape('Example application', function (t) {
   var expected = [
-    { port: 'DI', type: 'ask', i: 1, cb: true },
-    { port: 'UO', type: 'value', i: 1, v: 0 },
-    { port: 'DI', type: 'ask', i: 2, cb: true },
-    { port: 'UO', type: 'value', i: 2, v: 1 },
-    { port: 'DI', type: 'ask', i: 3, cb: true },
-    { port: 'UO', type: 'value', i: 3, v: 2 },
-    { port: 'DI', type: 'ask', i: 4, cb: true },
-    { port: 'UO', type: 'value', i: 4, v: 3 },
-    { port: 'DI', type: 'ask', i: 5, cb: true },
-    { port: 'UO', type: 'done', i: 5 }
+    { port: 'DI', type: 'request', request: 'ask', i: 1, cb: true },
+    { port: 'UO', type: 'answer', answer: 'value', i: 1, v: 0 },
+    { port: 'DI', type: 'request', request: 'ask', i: 2, cb: true },
+    { port: 'UO', type: 'answer', answer: 'value', i: 2, v: 1 },
+    { port: 'DI', type: 'request', request: 'ask', i: 3, cb: true },
+    { port: 'UO', type: 'answer', answer: 'value', i: 3, v: 2 },
+    { port: 'DI', type: 'request', request: 'ask', i: 4, cb: true },
+    { port: 'UO', type: 'answer', answer: 'value', i: 4, v: 3 },
+    { port: 'DI', type: 'request', request: 'ask', i: 5, cb: true },
+    { port: 'UO', type: 'answer', answer: 'done', i: 5 }
   ]
 
   var probe = reifier()

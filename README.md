@@ -27,16 +27,16 @@ pull(
 )
 
 /* Prints:
-  { port: 'DI', type: 'ask', i: 1, cb: true }
-  { port: 'UO', type: 'value', i: 1, v: 0 }
-  { port: 'DI', type: 'ask', i: 2, cb: true }
-  { port: 'UO', type: 'value', i: 2, v: 1 }
-  { port: 'DI', type: 'ask', i: 3, cb: true }
-  { port: 'UO', type: 'value', i: 3, v: 2 }
-  { port: 'DI', type: 'ask', i: 4, cb: true }
-  { port: 'UO', type: 'value', i: 4, v: 3 }
-  { port: 'DI', type: 'ask', i: 5, cb: true }
-  { port: 'UO', type: 'done', i: 5 }
+    { port: 'DI', type: 'request', request: 'ask', i: 1, cb: true },
+    { port: 'UO', type: 'answer', answer: 'value', i: 1, v: 0 },
+    { port: 'DI', type: 'request', request: 'ask', i: 2, cb: true },
+    { port: 'UO', type: 'answer', answer: 'value', i: 2, v: 1 },
+    { port: 'DI', type: 'request', request: 'ask', i: 3, cb: true },
+    { port: 'UO', type: 'answer', answer: 'value', i: 3, v: 2 },
+    { port: 'DI', type: 'request', request: 'ask', i: 4, cb: true },
+    { port: 'UO', type: 'answer', answer: 'value', i: 4, v: 3 },
+    { port: 'DI', type: 'request', request: 'ask', i: 5, cb: true },
+    { port: 'UO', type: 'answer', answer: 'done', i: 5 }
 */
 
 ````
@@ -50,7 +50,8 @@ Events correspond to the request or answers of the pull-stream callback protocol
 ````
   {
     port: String, // (default: 'DI')
-    type: 'ask', 
+    type: 'request', 
+    request: 'ask',
     i: Number, // (>= 1)
     cb: true
   }
@@ -59,7 +60,8 @@ Events correspond to the request or answers of the pull-stream callback protocol
 ````
   {
     port: String, // (default: 'DI')
-    type: 'abort', 
+    type: 'request',
+    request: 'abort', 
     i: Number, // (>= 1)
     cb: Boolean // (true if a callback was provided, false otherwise)
   }
@@ -68,7 +70,8 @@ Events correspond to the request or answers of the pull-stream callback protocol
 ````
   {
     port: String, (default: 'DI')
-    type: 'error',
+    type: 'request',
+    request: 'error',
     i: Number, // (>= 1)
     err: Error, 
     cb: Boolean // (true if a callback was provided, false otherwise)
@@ -80,7 +83,8 @@ Events correspond to the request or answers of the pull-stream callback protocol
 ````
   {
     port: String, // (default: 'UO')
-    type: 'value', 
+    type: 'answer',
+    answer: 'value', 
     i: Number, // (>= 1)
     v: Object 
   }
@@ -89,7 +93,8 @@ Events correspond to the request or answers of the pull-stream callback protocol
 ````
   {
     port: String, // (default: 'UO')
-    type: 'done', 
+    type: 'answer',
+    answer: 'done', 
     i: Number // (>= 1)
   }
 ````
@@ -97,7 +102,8 @@ Events correspond to the request or answers of the pull-stream callback protocol
 ````
   {
     port: String, // (default: 'UO')
-    type: 'error', 
+    type: 'answer',
+    answer: 'error', 
     i: Number, // (>= 1)
     err: String
   }

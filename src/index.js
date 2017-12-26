@@ -47,14 +47,16 @@ module.exports = function (limit, uoPort, diPort) {
     else if (!abort) {
       history.push({
         port: diPort,
-        type: 'ask',
+        type: 'request',
+        request: 'ask',
         i: i,
         cb: true
       })
     } else if (abort instanceof Error) {
       history.push({
         port: diPort,
-        type: 'error',
+        type: 'request',
+        request: 'error',
         i: i,
         err: abort,
         cb: !!cb
@@ -62,7 +64,8 @@ module.exports = function (limit, uoPort, diPort) {
     } else {
       history.push({
         port: diPort,
-        type: 'abort',
+        type: 'request',
+        request: 'abort',
         i: i,
         cb: !!cb
       })
@@ -77,21 +80,24 @@ module.exports = function (limit, uoPort, diPort) {
       if (!iDone) {
         history.push({
           port: uoPort,
-          type: 'value',
+          type: 'answer',
+          answer: 'value',
           i: i,
           v: v
         })
       } else if (iDone instanceof Error) {
         history.push({
           port: uoPort,
-          type: 'error',
+          type: 'answer',
+          answer: 'error',
           i: i,
           err: iDone.message
         })
       } else if (iDone) {
         history.push({
           port: uoPort,
-          type: 'done',
+          type: 'answer',
+          answer: 'done',
           i: i
         })
       }
