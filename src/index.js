@@ -58,7 +58,7 @@ module.exports = function (limit, uoPort, diPort) {
         type: 'request',
         request: 'error',
         i: i,
-        err: abort,
+        err: abort.message,
         cb: !!cb
       })
     } else {
@@ -74,39 +74,47 @@ module.exports = function (limit, uoPort, diPort) {
 
     setImmediate(function () { processPending(false) })
 
-    request(abort, function (iDone, v) {
-      if (done) return
+    if (!cb) {
+      request(abort)
+    } else {
+      // Lexical environment to make sure i keeps the same
+      // value even if multiple concurrent requests are issued
+      (function (i) {
+        request(abort, function (iDone, v) {
+          if (done) return
 
-      if (!iDone) {
-        history.push({
-          port: uoPort,
-          type: 'answer',
-          answer: 'value',
-          i: i,
-          v: v
-        })
-      } else if (iDone instanceof Error) {
-        history.push({
-          port: uoPort,
-          type: 'answer',
-          answer: 'error',
-          i: i,
-          err: iDone.message
-        })
-      } else if (iDone) {
-        history.push({
-          port: uoPort,
-          type: 'answer',
-          answer: 'done',
-          i: i
-        })
-      }
-      observed++
+          if (!iDone) {
+            history.push({
+              port: uoPort,
+              type: 'answer',
+              answer: 'value',
+              i: i,
+              v: v
+            })
+          } else if (iDone instanceof Error) {
+            history.push({
+              port: uoPort,
+              type: 'answer',
+              answer: 'error',
+              i: i,
+              err: iDone.message
+            })
+          } else if (iDone) {
+            history.push({
+              port: uoPort,
+              type: 'answer',
+              answer: 'done',
+              i: i
+            })
+          }
+          observed++
 
-      setImmediate(function () { processPending(false) })
-      if (iDone) return cb(iDone)
-      cb(iDone, v)
-    })
+          setImmediate(function () { processPending(false) })
+          if (iDone && cb) return cb(iDone)
+          cb && cb(iDone, v)
+        })
+      })(i)
+    }
   }
   function input (req) {
     request = req
